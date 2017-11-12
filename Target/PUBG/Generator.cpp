@@ -145,6 +145,10 @@ public:
 		}
 		return nullptr;
 	})"),
+			PredefinedMethod::Inline(R"(	inline void ProcessEvent(class UFunction* function, void* parms)
+	{
+		return GetVFunction<void(*)(UObject*, class UFunction*, void*)>(this, 57)(this, function, parms);
+	})"),
 			PredefinedMethod::Inline(R"(	static UClass* FindClass(const std::string& name)
 	{
 		return FindObject<UClass>(name);
@@ -219,6 +223,7 @@ class FUObjectItem
 public:
 	UObject* Object;
 	int32_t Flags;
+	int32_t ClusterIndex;
 	int32_t SerialNumber;
 
 	enum class ObjectFlags : int32_t
